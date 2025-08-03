@@ -1,69 +1,81 @@
-# React + TypeScript + Vite
+# React Context Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Цей проект демонструє використання React Context API для управління глобальним станом додатку без необхідності передачі пропсів через багато рівнів компонентів.
 
-Currently, two official plugins are available:
+## 📋 Відповідність завданню
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### ✅ Вимоги завдання та їх виконання:
 
-## Expanding the ESLint configuration
+1. **Створення файлу AppContext.tsx в src/context**
+   - ✅ Файл створено в правильній директорії `src/context/AppContext.tsx`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+2. **Створення контексту з осмисленим значенням за замовчуванням**
+   - ✅ Використано `createContext` з початковими даними користувачів
+   - ✅ Надано осмислене значення за замовчуванням: `['Олександр', 'Марія']`
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+3. **Реалізація провайдера контексту**
+   - ✅ Створено `UserProvider` компонент
+   - ✅ Провайдер передає дані користувачів та функцію для додавання нових користувачів
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+4. **Обгортання додатку в провайдер контексту**
+   - ✅ Основний компонент `App` обгорнуто в `UserProvider`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+5. **Компоненти на 2-3 рівнях вкладеності з використанням useContext**
+   - ✅ **Рівень 1**: `App` (обгортка в провайдер)
+   - ✅ **Рівень 2**: `Header` (використовує `useUsers()`)
+   - ✅ **Рівень 3**: `UserList` та `AddUserForm` (обидва використовують `useUsers()`)
+
+6. **Демонстрація передачі даних через контекст без пропсів**
+   - ✅ Дані передаються через контекст на всіх рівнях
+   - ✅ Компоненти отримують дані без прямих пропсів
+   - ✅ Функція `addUser` передається через контекст
+
+## 🚀 Функціональність
+
+- **Відображення списку користувачів** - показує поточний список користувачів
+- **Додавання нових користувачів** - можливість додавати нових користувачів через форму
+- **Глобальний стан** - всі дані управляються через React Context
+- **Типізація TypeScript** - повна типізація для безпеки типів
+
+## 🛠 Технології
+
+- **React 18** - основна бібліотека
+- **TypeScript** - типізація
+- **Vite** - збірник проекту
+- **React Context API** - управління глобальним станом
+
+## 📁 Структура проекту
+
+```
+src/
+├── context/
+│   └── AppContext.tsx    # Контекст та провайдер
+├── App.tsx              # Основний компонент
+├── main.tsx             # Точка входу
+└── ...
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎯 Ключові особливості реалізації
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Кастомний хук `useUsers`** - зручне використання контексту з обробкою помилок
+2. **Типізація TypeScript** - правильне визначення типів для контексту
+3. **Інтерактивність** - можливість додавати нових користувачів
+4. **Хороша структура коду** - компоненти розділені логічно
+5. **Стилізація** - використання CSS класів для красивого відображення
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🏃‍♂️ Запуск проекту
+
+```bash
+# Встановлення залежностей
+npm install
+
+# Запуск в режимі розробки
+npm run dev
+
+# Збірка для продакшену
+npm run build
 ```
+
+## 📝 Висновок
+
+Проект повністю відповідає всім вимогам завдання та демонструє правильне використання React Context API для управління глобальним станом додатку.
